@@ -1,0 +1,232 @@
+{
+  "brand": {
+    "name": "BRILLIANCE",
+    "subname": "NEXUS GLOBAL TECHNOLOGIES",
+    "email": "hello@brilliancelearn.com",
+    "line1": "0916 906 5307",
+    "line2": "0813 375 5637",
+    "line1Raw": "2349169065307",
+    "line2Raw": "2348133755637"
+  },
+  "hero": {
+    "prefix": "Get a professional",
+    "words": [
+      "online store",
+      "church website",
+      "school website",
+      "real estate website",
+      "portfolio website",
+      "business website"
+    ],
+    "tail": "that sells for you 24/7.",
+    "description": "Professional, fast and high-converting websites for freelancers, startups, churches, schools, real estate firms and online stores. Pick a site below and use it the way your customers would.",
+    "fromPrice": "₦80,000",
+    "ticks": [
+      "Mobile friendly",
+      "Payment gateway integration",
+      "WhatsApp chat button",
+      "Free domain setup"
+    ]
+  },
+  "features": [
+    {
+      "id": 1,
+      "title": "Mobile friendly",
+      "description": "Most of your customers will find you on their phones. Every page is designed for small screens first."
+    },
+    {
+      "id": 2,
+      "title": "Payment gateway integration",
+      "description": "Collect card, transfer and USSD payments in naira through gateways like Paystack and Flutterwave. Included on e-commerce, real estate and church websites."
+    },
+    {
+      "id": 3,
+      "title": "WhatsApp direct chat",
+      "description": "One tap from any page opens a chat with you, so warm leads never go cold."
+    },
+    {
+      "id": 4,
+      "title": "Free domain setup",
+      "description": "We set up and connect your domain for you. E-commerce and real estate websites also get a free .com.ng domain."
+    }
+  ],
+  "process": [
+    {
+      "step": "01",
+      "title": "Say hello on WhatsApp",
+      "description": "Tell us about your business and which demo you liked."
+    },
+    {
+      "step": "02",
+      "title": "Pick a package",
+      "description": "Agree on pages and features, then send your logo, photos and text."
+    },
+    {
+      "step": "03",
+      "title": "Review your design",
+      "description": "We design it, you review it, and we refine until it feels right."
+    },
+    {
+      "step": "04",
+      "title": "Go live",
+      "description": "We connect your domain, set up payments and launch."
+    }
+  ],
+  "samples": [
+    {
+      "id": "sample-1",
+      "title": "Homedine Organics",
+      "category": "E-Commerce",
+      "badge": "Online store",
+      "description": "Clean, product-led store with quick cart and Nigerian payment gateway checkout.",
+      "imageUrl": "",
+      "demoKey": "store"
+    },
+    {
+      "id": "sample-2",
+      "title": "Prime Horizons Realty",
+      "category": "Real Estate",
+      "badge": "Property listings",
+      "description": "Property catalogue with neighborhood filtering, inspection booking and mortgage calculator.",
+      "imageUrl": "",
+      "demoKey": "realestate"
+    },
+    {
+      "id": "sample-3",
+      "title": "Grace Assembly International",
+      "category": "Church & Ministry",
+      "badge": "Ministry portal",
+      "description": "Audio sermon player, livestream player, prayer request box and online giving gateway.",
+      "imageUrl": "",
+      "demoKey": "church"
+    }
+  ],
+  "pricing": [
+    {
+      "name": "Landing Page",
+      "price": 80000,
+      "best": "Ad campaigns, events, single-product offers and lead generation.",
+      "inc": [
+        "One focused, high-converting page",
+        "Lead capture form",
+        "WhatsApp chat button",
+        "Free domain setup"
+      ],
+      "demo": "landing",
+      "hot": false
+    },
+    {
+      "name": "Portfolio Website",
+      "price": 120000,
+      "best": "Freelancers, consultants, creators and professionals.",
+      "inc": [
+        "Showcase your work and services",
+        "About, projects and contact pages",
+        "Mobile-friendly design",
+        "Free domain setup"
+      ],
+      "demo": "portfolio",
+      "hot": false
+    },
+    {
+      "name": "Business Website",
+      "price": 200000,
+      "best": "SMEs, corporate firms, schools and service providers.",
+      "inc": [
+        "Multi-page company website",
+        "Services, about and contact pages",
+        "WhatsApp direct chat",
+        "Free domain setup"
+      ],
+      "demo": "business",
+      "hot": true
+    },
+    {
+      "name": "Church Website",
+      "price": 200000,
+      "best": "Churches and ministries that want to reach members beyond Sunday.",
+      "inc": [
+        "Livestream and sermon archive",
+        "Service times and events",
+        "Online giving through a payment gateway (e.g. Paystack, Flutterwave)",
+        "Prayer request form",
+        "Free domain setup"
+      ],
+      "demo": "church",
+      "hot": false
+    },
+    {
+      "name": "Real Estate Website",
+      "price": 350000,
+      "best": "Real estate companies and agents selling or renting property.",
+      "inc": [
+        "Property listings and search",
+        "Inspection booking",
+        "Payment gateway integration (e.g. Paystack, Flutterwave)",
+        "Website analytics",
+        "Back office: manage listings, users and payments yourself",
+        "Free .com.ng domain & setup"
+      ],
+      "demo": "realestate",
+      "hot": false
+    },
+    {
+      "name": "Simple E-Commerce",
+      "price": 350000,
+      "best": "Retail brands that want to sell online 24/7.",
+      "inc": [
+        "Product catalogue and cart",
+        "Payment gateway integration (e.g. Paystack, Flutterwave)",
+        "Website analytics",
+        "Back office: manage products, users and transactions yourself",
+        "Free .com.ng domain & setup"
+      ],
+      "demo": "store",
+      "hot": false
+    },
+    {
+      "name": "Pro E-commerce",
+      "price": 500000,
+      "best": "Growing stores that need more products and custom features.",
+      "inc": [
+        "Everything in Simple E-Commerce",
+        "Larger catalogue and categories",
+        "Custom features for your store",
+        "Analytics & back office included",
+        "Free .com.ng domain & setup"
+      ],
+      "demo": "store",
+      "hot": false
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Is the domain free?",
+      "a": "E-commerce and real estate websites come with a free .com.ng domain and setup. Every other package includes free domain setup: you get the domain you want, and we set it up and connect it to your new website for you."
+    },
+    {
+      "q": "Can my customers pay me online?",
+      "a": "Yes. E-commerce, real estate and church websites come with payment gateway integration, using a gateway such as Paystack or Flutterwave. Customers pay by card, bank transfer or USSD, and the money lands in your account."
+    },
+    {
+      "q": "Can I update my products or listings myself?",
+      "a": "Yes. Real estate and e-commerce websites come with website analytics and a back office where you manage users, transactions, products and listings without a developer. Open the E-commerce or Real estate demo above and tap 'Open the back office' to try it."
+    },
+    {
+      "q": "Will the website work on phones?",
+      "a": "Yes. Every site is mobile friendly. Switch the demo above to Mobile to see exactly how your pages will look on a phone."
+    },
+    {
+      "q": "Why do prices say 'from'?",
+      "a": "The starting price covers the core build for that package. Extra pages, products or custom features change the final quote, and we agree on it with you before any work starts."
+    },
+    {
+      "q": "Which package is right for me?",
+      "a": "Running ads or an event? Landing Page. Freelancer or creator? Portfolio. A company or school? Business Website. A church or ministry? Church Website. Real estate firm? Real Estate Website. Selling products? E-Commerce. Not sure? Message us and we will recommend one."
+    }
+  ],
+  "close": {
+    "title": "Ready to take your business to the next level?",
+    "description": "Send us a message on WhatsApp. Tell us what you do and which demo you liked, and we will take it from there."
+  }
+}

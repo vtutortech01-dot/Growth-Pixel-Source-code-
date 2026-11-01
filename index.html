@@ -67,6 +67,43 @@ p{margin:0}
 @media (max-width:860px){.nav-links{display:none}}
 @media (max-width:420px){.nav .btn span{display:none}.nav .btn{padding:11px}}
 
+/* Modern Hamburger Button */
+.site-hamburger-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--white);border:1.5px solid var(--line);color:var(--ink);border-radius:999px;padding:9px 18px;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s ease;box-shadow:0 4px 14px -6px rgba(11,22,64,.15)}
+.site-hamburger-btn:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px);box-shadow:0 6px 18px -6px rgba(16,70,230,.25)}
+.site-hamburger-btn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.site-hamburger-lines{width:20px;height:14px;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+.line-bar{display:block;width:100%;height:2px;background:currentColor;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.site-hamburger-btn[aria-expanded="true"] .bar-1{transform:translateY(6px) rotate(45deg)}
+.site-hamburger-btn[aria-expanded="true"] .bar-2{opacity:0;transform:scaleX(0)}
+.site-hamburger-btn[aria-expanded="true"] .bar-3{transform:translateY(-6px) rotate(-45deg)}
+@media (max-width:480px){.hamburger-label{display:none}.site-hamburger-btn{padding:10px 13px}}
+
+/* Slide-Up Navigation Drawer */
+.site-nav-drawer{position:fixed;inset:0;z-index:99999;background:#0B1640;color:#FFFFFF;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .4s cubic-bezier(0.16,1,0.3,1),visibility .4s;visibility:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.site-nav-drawer.open{transform:translateY(0);visibility:visible}
+html.menu-open,body.menu-open{overflow:hidden!important;touch-action:none}
+.site-nav-drawer-header{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;padding-block:14px;border-bottom:1px solid rgba(255,255,255,.14);flex:none}
+.brand-light{color:#FFFFFF!important}
+.brand-light small{color:#D6E0FF!important}
+.site-nav-drawer-close{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.28);color:#FFFFFF;border-radius:999px;padding:9px 18px;font-weight:700;font-size:14px;cursor:pointer;transition:all .15s ease}
+.site-nav-drawer-close:hover{background:rgba(255,255,255,.2);border-color:#FFFFFF;transform:scale(1.02)}
+.site-nav-drawer-close svg{width:18px;height:18px}
+.site-nav-drawer-body{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding-block:32px 36px;gap:28px}
+.site-nav-drawer-menu{display:flex;flex-direction:column;gap:10px}
+.site-nav-drawer-item{display:flex;align-items:center;gap:18px;padding:16px 20px;border-radius:16px;text-decoration:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);transition:all .2s ease;position:relative}
+.site-nav-drawer-item:hover,.site-nav-drawer-item:focus-visible{background:rgba(255,255,255,.14);border-color:var(--yellow);transform:translateX(6px);outline:none}
+.item-num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--yellow);background:rgba(247,195,24,.18);padding:4px 8px;border-radius:6px}
+.item-title{font-family:var(--display);font-size:clamp(22px,3.2vw,30px);font-weight:800;color:#FFFFFF;letter-spacing:-.02em}
+.item-hint{font-size:13.5px;color:#B2C2EE;margin-left:auto;display:block}
+.item-arrow{width:22px;height:22px;color:var(--yellow);opacity:.6;transition:transform .2s ease,opacity .2s ease;flex:none}
+.site-nav-drawer-item:hover .item-arrow{opacity:1;transform:translateX(4px)}
+@media (max-width:720px){.item-hint{display:none}.site-nav-drawer-item{padding:14px 16px;gap:12px}.item-title{font-size:20px}}
+.site-nav-drawer-footer{border-top:1px solid rgba(255,255,255,.12);padding-top:20px}
+.site-nav-drawer-contact-card{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:16px 22px}
+.contact-lbl{font-size:11px;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);font-weight:700;display:block;margin-bottom:3px}
+.contact-phones{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:15px;font-weight:600;color:#FFFFFF}
+.phone-sep{opacity:.4}
+
 /* hero */
 .top-hero{position:relative;overflow:hidden;padding-block:40px 28px}
 .orbits{position:absolute;inset:0;pointer-events:none;z-index:0}
@@ -866,15 +903,102 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
           <a href="#faq">          FAQ
 </a>
         </div>
-        <a class="btn btn-wa btn-sm" data-wa="nav" href="#" rel="noopener" target="_blank">        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z">
-          </path>
-        </svg>
-        <span>        Chat on WhatsApp
-</span>
-</a>
+        <button type="button" class="site-hamburger-btn" id="siteHamburgerBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="siteNavDrawer">
+          <span class="site-hamburger-lines" aria-hidden="true">
+            <span class="line-bar bar-1"></span>
+            <span class="line-bar bar-2"></span>
+            <span class="line-bar bar-3"></span>
+          </span>
+          <span class="hamburger-label">Menu</span>
+        </button>
       </div>
     </nav>
+
+    <!-- Animated Slide-Up Navigation Drawer (Solid & Fully Opaque) -->
+    <div class="site-nav-drawer" id="siteNavDrawer" role="dialog" aria-modal="true" aria-label="Site Navigation" aria-hidden="true">
+      <div class="site-nav-drawer-header wrap">
+        <a aria-label="Brilliance Nexus Global Technologies, home" class="brand brand-light" href="#top">
+          <svg viewBox="0 0 64 70" aria-hidden="true">
+            <path d="M8 0H45a19 19 0 0 1 0 38H0V8a8 8 0 0 1 8-8Z" fill="#3B71FE"></path>
+            <path d="M0 45h52a11 11 0 0 1 0 22H9a9 9 0 0 1-9-9Z" fill="#1FCB72"></path>
+          </svg>
+          <span>
+            <b>BRILLIANCE</b>
+            <small>NEXUS GLOBAL<br />TECHNOLOGIES</small>
+          </span>
+        </a>
+        <button type="button" class="site-nav-drawer-close" id="siteNavCloseBtn" aria-label="Close navigation menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg>
+          <span>Close</span>
+        </button>
+      </div>
+
+      <div class="site-nav-drawer-body wrap">
+        <nav class="site-nav-drawer-menu" aria-label="Slide-up menu links">
+          <a href="#demos" class="site-nav-drawer-item">
+            <span class="item-num">01</span>
+            <span class="item-title">Live demos</span>
+            <span class="item-hint">Try interactive live websites</span>
+            <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="#samples" class="site-nav-drawer-item">
+            <span class="item-num">02</span>
+            <span class="item-title">Our work</span>
+            <span class="item-hint">Full-page finished design references</span>
+            <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="#pricing" class="site-nav-drawer-item">
+            <span class="item-num">03</span>
+            <span class="item-title">Pricing</span>
+            <span class="item-hint">Fixed package pricing starting from ₦80,000</span>
+            <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="#how" class="site-nav-drawer-item">
+            <span class="item-num">04</span>
+            <span class="item-title">How it works</span>
+            <span class="item-hint">4 simple steps to your live website</span>
+            <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="#faq" class="site-nav-drawer-item">
+            <span class="item-num">05</span>
+            <span class="item-title">FAQ</span>
+            <span class="item-hint">Frequently asked questions and answers</span>
+            <svg class="item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </nav>
+
+        <div class="site-nav-drawer-footer">
+          <div class="site-nav-drawer-contact-card">
+            <div>
+              <span class="contact-lbl">Direct WhatsApp Support</span>
+              <div class="contact-phones">
+                <span class="phone-item">0916 906 5307</span>
+                <span class="phone-sep">·</span>
+                <span class="phone-item">0813 375 5637</span>
+              </div>
+            </div>
+            <a class="btn btn-wa btn-sm" id="drawerWaBtn" data-wa="drawer" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"></path>
+              </svg>
+              <span>Chat on WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     <header class="top-hero" id="top">
       <div class="orbits" aria-hidden="true">
         <i></i>
@@ -2150,6 +2274,167 @@ document.getElementById(&#34;plans&#34;).innerHTML=PLANS.map(p=&gt;{
 wireWA();
 if(matchMedia(&#34;(max-width:700px)&#34;).matches)state.mode=&#34;mobile&#34;,document.getElementById(&#34;vDesk&#34;).setAttribute(&#34;aria-pressed&#34;,&#34;false&#34;),document.getElementById(&#34;vMob&#34;).setAttribute(&#34;aria-pressed&#34;,&#34;true&#34;);
 setDemo(&#34;store&#34;);
+
+/* ---------- Hamburger & Slide-Up Navigation Drawer ---------- */
+const siteDrawerEl = document.getElementById("siteNavDrawer");
+const siteBurgerBtn = document.getElementById("siteHamburgerBtn");
+const siteCloseBtn = document.getElementById("siteNavCloseBtn");
+let lastNavFocus = null;
+
+function openNavDrawer() {
+  if (!siteDrawerEl) return;
+  lastNavFocus = document.activeElement;
+  siteDrawerEl.classList.add("open");
+  siteDrawerEl.setAttribute("aria-hidden", "false");
+  if (siteBurgerBtn) siteBurgerBtn.setAttribute("aria-expanded", "true");
+  document.documentElement.classList.add("menu-open");
+  document.body.classList.add("menu-open");
+  if (siteCloseBtn) siteCloseBtn.focus({ preventScroll: true });
+}
+
+function closeNavDrawer() {
+  if (!siteDrawerEl) return;
+  siteDrawerEl.classList.remove("open");
+  siteDrawerEl.setAttribute("aria-hidden", "true");
+  if (siteBurgerBtn) siteBurgerBtn.setAttribute("aria-expanded", "false");
+  document.documentElement.classList.remove("menu-open");
+  document.body.classList.remove("menu-open");
+  if (lastNavFocus && lastNavFocus.focus) lastNavFocus.focus({ preventScroll: true });
+}
+
+if (siteBurgerBtn) {
+  siteBurgerBtn.addEventListener("click", () => {
+    const isOpen = siteDrawerEl.classList.contains("open");
+    if (isOpen) closeNavDrawer();
+    else openNavDrawer();
+  });
+}
+
+if (siteCloseBtn) {
+  siteCloseBtn.addEventListener("click", closeNavDrawer);
+}
+
+if (siteDrawerEl) {
+  siteDrawerEl.querySelectorAll(".site-nav-drawer-item").forEach(link => {
+    link.addEventListener("click", (e) => {
+      closeNavDrawer();
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 120);
+        }
+      }
+    });
+  });
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && siteDrawerEl && siteDrawerEl.classList.contains("open")) {
+    closeNavDrawer();
+  }
+});
+
+/* ---------- Dynamic Backend Content Sync ---------- */
+async function loadPersistentSiteContent() {
+  try {
+    const res = await fetch("/api/content");
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data || typeof data !== "object") return;
+
+    if (data.brand) {
+      if (data.brand.name) {
+        document.querySelectorAll(".brand b").forEach(el => el.textContent = data.brand.name);
+      }
+      if (data.brand.subname) {
+        document.querySelectorAll(".brand small").forEach(el => el.innerHTML = data.brand.subname.replace(/\n/g, "<br />"));
+      }
+      if (data.brand.email) {
+        const mailEl = document.querySelector(".close .mail b");
+        if (mailEl) mailEl.textContent = data.brand.email;
+      }
+      if (data.brand.line1) {
+        const l1 = document.querySelector('[data-line="0"]');
+        if (l1) {
+          const numEl = l1.closest(".line")?.querySelector(".num");
+          if (numEl) numEl.innerHTML = `<span class="lbl">Line 1</span> ${data.brand.line1}`;
+        }
+      }
+      if (data.brand.line2) {
+        const l2 = document.querySelector('[data-line="1"]');
+        if (l2) {
+          const numEl = l2.closest(".line")?.querySelector(".num");
+          if (numEl) numEl.innerHTML = `<span class="lbl">Line 2</span> ${data.brand.line2}`;
+        }
+      }
+    }
+
+    if (data.hero) {
+      if (data.hero.prefix) {
+        const h1 = document.querySelector(".top-hero h1");
+        if (h1 && h1.firstChild && h1.firstChild.nodeType === Node.TEXT_NODE) {
+          h1.firstChild.textContent = data.hero.prefix + "\n";
+        }
+      }
+      if (data.hero.tail && document.getElementById("ht")) {
+        document.getElementById("ht").textContent = data.hero.tail;
+      }
+      if (data.hero.description) {
+        const desc = document.querySelector(".hero-side p");
+        if (desc) desc.textContent = data.hero.description;
+      }
+    }
+
+    if (data.samples && Array.isArray(data.samples)) {
+      const sampleViews = document.querySelectorAll(".samples .sample");
+      data.samples.forEach((sample, i) => {
+        if (sampleViews[i]) {
+          if (sample.title) {
+            const h3 = sampleViews[i].querySelector("h3");
+            if (h3) h3.textContent = sample.title;
+          }
+          if (sample.description) {
+            const p = sampleViews[i].querySelector("p");
+            if (p) p.textContent = sample.description;
+          }
+          if (sample.imageUrl) {
+            const img = sampleViews[i].querySelector("img");
+            if (img) img.src = sample.imageUrl;
+          }
+        }
+      });
+    }
+
+    if (data.pricing && Array.isArray(data.pricing)) {
+      data.pricing.forEach((item, i) => {
+        if (PLANS[i]) {
+          if (item.name) PLANS[i].name = item.name;
+          if (item.price) PLANS[i].price = item.price;
+          if (item.best) PLANS[i].best = item.best;
+          if (item.inc) PLANS[i].inc = item.inc;
+          if (typeof item.hot === "boolean") PLANS[i].hot = item.hot;
+        }
+      });
+      const plansContainer = document.getElementById("plans");
+      if (plansContainer) {
+        plansContainer.innerHTML = PLANS.map(p => {
+          const msg = `Hi Brilliance Nexus, I'm interested in the ${p.name} package (from ${naira(p.price)}). Can we talk about my project?`;
+          return `<article class="plan${p.hot ? ' hot' : ''}">${p.hot ? '<span class="badge">Most popular</span>' : ''}
+            <h3>${p.name}</h3><div><div class="from">Starting from</div><div class="amt">${naira(p.price)}</div></div>
+            <p class="best">${p.best}</p><ul>${p.inc.map(i => `<li>${i}</li>`).join('')}</ul>
+            <div class="acts"><a class="btn ${p.hot ? 'btn-wa' : 'btn-blue'} btn-sm" data-wa="plan" data-msg="${escapeHTML(msg)}" href="${waURL(msg)}" target="_blank" rel="noopener">${WA_SVG}Get started</a><button class="btn btn-ghost btn-sm" data-open="${p.demo}">Preview a demo</button></div></article>`;
+        }).join('');
+      }
+    }
+  } catch (err) {
+    console.debug("Backend content sync not required", err);
+  }
+}
+loadPersistentSiteContent();
     </script>
   </body>
 </html>

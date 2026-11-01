@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Portal — Growth Pixel / Brilliance Nexus</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-3.5%200%2069%2069%22%3E%3Cpath%20d%3D%22M0%200H50A12%2012%200%200%201%2062%2012V24A12%2012%200%200%201%2050%2036H14A14%2014%200%200%201%200%2022Z%22%20fill%3D%22%230A4BD9%22/%3E%3Cpath%20d%3D%22M8%2042H48.5A11.5%2011.5%200%200%201%2048.5%2065H22C15%2065%2013.5%2069%207.5%2069A7.5%207.5%200%200%201%200%2061.5V50A8%208%200%200%201%208%2042Z%22%20fill%3D%22%2306DB7E%22/%3E%3C/svg%3E%0A" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" />
+  <style>
+    :root {
+      --paper: #F4F6FD;
+      --white: #FFFFFF;
+      --ink: #0B1640;
+      --ink-2: #4A5578;
+      --ink-3: #7A84A3;
+      --blue: #1046E6;
+      --blue-deep: #0B2FA8;
+      --mist: #E2E9FB;
+      --line: #D8DFF1;
+      --green: #1FCB72;
+      --green-deep: #0E9F55;
+      --yellow: #F7C318;
+      --yellow-soft: #FFF3C4;
+      --red: #E53E3E;
+      --red-soft: #FED7D7;
+      --display: "Plus Jakarta Sans", system-ui, sans-serif;
+      --body: "Plus Jakarta Sans", system-ui, sans-serif;
+      --mono: "JetBrains Mono", monospace;
+      --r-md: 14px;
+      --r-lg: 20px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    input, textarea, select {
+      font: inherit;
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--ink);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(16,70,230,.15);
+    }
+    textarea { resize: vertical; min-height: 80px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-blue {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 8px 20px -8px rgba(16,70,230,.8);
+    }
+    .btn-blue:hover { background: var(--blue-deep); }
+    .btn-green {
+      background: var(--green);
+      color: #05301A;
+      box-shadow: 0 8px 20px -8px rgba(31,203,114,.8);
+    }
+    .btn-green:hover { background: #26dc7e; }
+    .btn-ghost {
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      color: var(--ink);
+    }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+    .btn-danger {
+      background: #FFF5F5;
+      border: 1.5px solid #FEB2B2;
+      color: var(--red);
+    }
+    .btn-danger:hover { background: var(--red); color: #fff; }
+    .btn-sm { padding: 7px 14px; font-size: 13px; }
+
+    /* Top Nav */
+    .admin-header {
+      background: #0B1640;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 20px rgba(11,22,64,.2);
+    }
+    .admin-header .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .admin-brand svg { width: 32px; height: 35px; flex: none; }
+    .admin-brand b { font-size: 18px; font-weight: 800; letter-spacing: .02em; display: block; line-height: 1.1; }
+    .admin-brand span { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #AFC2FF; font-family: var(--mono); }
+    .admin-badge {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-family: var(--mono);
+      color: #FFF3C4;
+    }
+    .admin-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Auth Card View */
+    .auth-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .auth-card {
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 36px 32px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 24px 60px -20px rgba(11,22,64,.25);
+    }
+    .auth-card h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .auth-card p {
+      font-size: 14px;
+      color: var(--ink-2);
+      margin-bottom: 24px;
+    }
+    .auth-notice {
+      background: var(--yellow-soft);
+      border: 1px solid #F5E296;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #7A5900;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .form-group small {
+      display: block;
+      font-size: 11.5px;
+      color: var(--ink-3);
+      margin-top: 4px;
+    }
+
+    /* Dashboard Layout */
+    .dashboard-layout {
+      max-width: 1240px;
+      margin: 24px auto 80px;
+      padding: 0 20px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .dashboard-layout { grid-template-columns: 1fr; }
+    }
+
+    /* Sidebar Navigation */
+    .admin-sidebar {
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 14px;
+      height: fit-content;
+      position: sticky;
+      top: 80px;
+      box-shadow: 0 10px 30px -15px rgba(11,22,64,.1);
+    }
+    .admin-menu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .admin-menu-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--ink-2);
+      font-weight: 600;
+      font-size: 13.5px;
+      text-align: left;
+      transition: all .15s ease;
+    }
+    .admin-menu-btn:hover {
+      background: var(--paper);
+      color: var(--blue);
+    }
+    .admin-menu-btn.active {
+      background: var(--blue);
+      color: #fff;
+    }
+    .admin-menu-btn svg { width: 18px; height: 18px; flex: none; }
+
+    /* Main Content Area */
+    .admin-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .panel-card {
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 26px 28px;
+      box-shadow: 0 10px 30px -15px rgba(11,22,64,.1);
+    }
+    .panel-header {
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .panel-header h2 {
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .panel-header p {
+      font-size: 13.5px;
+      color: var(--ink-2);
+      margin-top: 2px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 650px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* Project Cards & Uploader */
+    .project-item {
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+      background: var(--paper);
+    }
+    .project-item:last-child { margin-bottom: 0; }
+    .image-upload-box {
+      border: 2px dashed #B8C5EA;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      background: #fff;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .image-upload-box:hover {
+      border-color: var(--blue);
+    }
+    .image-preview-thumb {
+      max-height: 120px;
+      max-width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-top: 10px;
+      display: block;
+      border: 1px solid var(--line);
+    }
+
+    /* Save Floating Bar */
+    .save-bar {
+      position: fixed;
+      bottom: 20px;
+      right: 24px;
+      left: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #0B1640;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(11,22,64,.4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      gap: 16px;
+      transform: translateY(120%);
+      transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .save-bar.visible {
+      transform: translateY(0);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: #0B1640;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      z-index: 200;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all .25s ease;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toast.success { background: #0E9F55; }
+    .toast.error { background: #E53E3E; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="admin-header">
+    <div class="wrap">
+      <div class="admin-brand">
+        <svg viewBox="0 0 64 70" aria-hidden="true">
+          <path d="M8 0H45a19 19 0 0 1 0 38H0V8a8 8 0 0 1 8-8Z" fill="#1046E6" />
+          <path d="M0 45h52a11 11 0 0 1 0 22H9a9 9 0 0 1-9-9Z" fill="#1FCB72" />
+        </svg>
+        <div>
+          <b>GROWTH PIXEL</b>
+          <span>ADMINISTRATOR CONSOLE</span>
+        </div>
+      </div>
+      <div class="admin-nav-actions">
+        <span class="admin-badge" id="adminUserBadge" style="display:none;">Admin</span>
+        <a href="/" target="_blank" class="btn btn-ghost btn-sm" style="background:rgba(255,255,255,.1); color:#fff; border-color:rgba(255,255,255,.3);">View Website ↗</a>
+        <button id="logoutBtn" class="btn btn-danger btn-sm" style="display:none;">Log Out</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Auth Container: Setup or Login -->
+  <main id="authSection" class="auth-container">
+    <div class="auth-card" id="setupCard" style="display:none;">
+      <h1>Initial Administrator Setup</h1>
+      <p>Configure the first administrator account. Once created, public registration is permanently disabled.</p>
+      <div class="auth-notice">
+        <b>Security Notice:</b> This form is only available for initial setup. Subsequent access requires the registered credentials.
+      </div>
+      <form id="setupForm">
+        <div class="form-group">
+          <label for="setupEmail">Administrator Email</label>
+          <input type="email" id="setupEmail" placeholder="admin@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="setupPass">Create Password</label>
+          <input type="password" id="setupPass" minlength="8" placeholder="Minimum 8 characters" required />
+          <small>Must be at least 8 characters long.</small>
+        </div>
+        <div class="form-group">
+          <label for="setupConfirm">Confirm Password</label>
+          <input type="password" id="setupConfirm" minlength="8" placeholder="Repeat your password" required />
+        </div>
+        <button type="submit" class="btn btn-blue" style="width:100%; margin-top:8px;">Complete Setup &amp; Log In</button>
+      </form>
+    </div>
+
+    <div class="auth-card" id="loginCard" style="display:none;">
+      <h1>Administrator Login</h1>
+      <p>Sign in to access the Growth Pixel website management dashboard.</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" placeholder="admin@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Password</label>
+          <input type="password" id="loginPass" placeholder="Enter your password" required />
+        </div>
+        <button type="submit" class="btn btn-blue" style="width:100%; margin-top:8px;">Sign In to Dashboard</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Dashboard Container -->
+  <main id="dashboardSection" class="dashboard-layout" style="display:none;">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <ul class="admin-menu-list">
+        <li><button class="admin-menu-btn active" data-tab="tabBranding">🏢 Branding &amp; Contact</button></li>
+        <li><button class="admin-menu-btn" data-tab="tabHero">🚀 Hero &amp; Headlines</button></li>
+        <li><button class="admin-menu-btn" data-tab="tabProjects">💼 Projects &amp; Work</button></li>
+        <li><button class="admin-menu-btn" data-tab="tabPricing">💳 Pricing Packages</button></li>
+        <li><button class="admin-menu-btn" data-tab="tabFeatures">⚡ Core Features</button></li>
+        <li><button class="admin-menu-btn" data-tab="tabProcess">🔄 How It Works</button></li>
+        <li><button class="admin-menu-btn" data-tab="tabFaq">❓ FAQ Accordion</button></li>
+        <li><button class="admin-menu-btn" data-tab="tabSecurity">🔒 Security &amp; Password</button></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Panels -->
+    <div class="admin-content">
+
+      <!-- Panel: Branding & Contact -->
+      <section class="panel-card tab-panel" id="tabBranding">
+        <div class="panel-header">
+          <div>
+            <h2>Website Identity &amp; Contact Information</h2>
+            <p>Update official business contact channels and WhatsApp communication numbers.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Brand Name</label>
+            <input type="text" id="bBrandName" />
+          </div>
+          <div class="form-group">
+            <label>Sub-heading / Tagline</label>
+            <input type="text" id="bBrandSub" />
+          </div>
+          <div class="form-group">
+            <label>Contact Email</label>
+            <input type="email" id="bEmail" />
+          </div>
+          <div class="form-group">
+            <label>Phone Line 1 (Display)</label>
+            <input type="text" id="bLine1" />
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Line 1 (Raw International digits, e.g. 2349169065307)</label>
+            <input type="text" id="bLine1Raw" />
+          </div>
+          <div class="form-group">
+            <label>Phone Line 2 (Display)</label>
+            <input type="text" id="bLine2" />
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Line 2 (Raw International digits, e.g. 2348133755637)</label>
+            <input type="text" id="bLine2Raw" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel: Hero & Headlines -->
+      <section class="panel-card tab-panel" id="tabHero" style="display:none;">
+        <div class="panel-header">
+          <div>
+            <h2>Hero Section &amp; Headlines</h2>
+            <p>Manage the top headline, typewriter rotating phrases, and key value propositions.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Headline Prefix</label>
+            <input type="text" id="hPrefix" placeholder="Get a professional" />
+          </div>
+          <div class="form-group">
+            <label>Headline Tail</label>
+            <input type="text" id="hTail" placeholder="that sells for you 24/7." />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Rotating Words (Comma-separated)</label>
+          <input type="text" id="hWords" placeholder="online store, church website, school website, real estate website" />
+          <small>Words typed in the animated typewriter header.</small>
+        </div>
+        <div class="form-group">
+          <label>Hero Description Paragraph</label>
+          <textarea id="hDesc"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>From Price Tag (e.g. ₦80,000)</label>
+            <input type="text" id="hPrice" />
+          </div>
+          <div class="form-group">
+            <label>Checkmark Highlights (Comma-separated)</label>
+            <input type="text" id="hTicks" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel: Projects & Direct Image Uploads -->
+      <section class="panel-card tab-panel" id="tabProjects" style="display:none;">
+        <div class="panel-header">
+          <div>
+            <h2>Portfolio &amp; Project References ("Our Work")</h2>
+            <p>Edit case studies and upload new screenshots directly without manually pasting URLs.</p>
+          </div>
+        </div>
+        <div id="projectsList"></div>
+      </section>
+
+      <!-- Panel: Pricing Packages -->
+      <section class="panel-card tab-panel" id="tabPricing" style="display:none;">
+        <div class="panel-header">
+          <div>
+            <h2>Pricing Packages</h2>
+            <p>Update rates, features included, and best-fit client descriptions.</p>
+          </div>
+        </div>
+        <div id="pricingList"></div>
+      </section>
+
+      <!-- Panel: Core Features -->
+      <section class="panel-card tab-panel" id="tabFeatures" style="display:none;">
+        <div class="panel-header">
+          <div>
+            <h2>Services &amp; Core Value Features</h2>
+            <p>Manage the 4 key feature boxes displayed on the home page.</p>
+          </div>
+        </div>
+        <div id="featuresList"></div>
+      </section>
+
+      <!-- Panel: Process -->
+      <section class="panel-card tab-panel" id="tabProcess" style="display:none;">
+        <div class="panel-header">
+          <div>
+            <h2>How It Works (Process Steps)</h2>
+            <p>Step-by-step roadmap from initial conversation to live site.</p>
+          </div>
+        </div>
+        <div id="processList"></div>
+      </section>
+
+      <!-- Panel: FAQ -->
+      <section class="panel-card tab-panel" id="tabFaq" style="display:none;">
+        <div class="panel-header">
+          <div>
+            <h2>Frequently Asked Questions</h2>
+            <p>Update common questions and clear answers for prospective clients.</p>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" id="addFaqBtn">+ Add FAQ</button>
+        </div>
+        <div id="faqList"></div>
+      </section>
+
+      <!-- Panel: Security & Password -->
+      <section class="panel-card tab-panel" id="tabSecurity" style="display:none;">
+        <div class="panel-header">
+          <div>
+            <h2>Administrator Account &amp; Security</h2>
+            <p>Update your email address or change your administrator password.</p>
+          </div>
+        </div>
+        <form id="securityForm" style="max-width:440px;">
+          <div class="form-group">
+            <label>Current Administrator Password</label>
+            <input type="password" id="secCurrentPass" required />
+            <small>Required to authorize any credential changes.</small>
+          </div>
+          <div class="form-group">
+            <label>Update Administrator Email</label>
+            <input type="email" id="secNewEmail" />
+          </div>
+          <div class="form-group">
+            <label>New Password (Leave blank to keep current)</label>
+            <input type="password" id="secNewPass" minlength="8" placeholder="At least 8 characters" />
+          </div>
+          <button type="submit" class="btn btn-blue">Update Security Credentials</button>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Sticky Save Bar -->
+  <div class="save-bar" id="saveBar">
+    <div>
+      <b>Unsaved Changes Detected</b>
+      <div style="font-size:12px; color:#C9D6FF;">Changes will be saved persistently to the database.</div>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <button type="button" class="btn btn-ghost btn-sm" id="discardBtn">Discard</button>
+      <button type="button" class="btn btn-green btn-sm" id="saveAllBtn">Save All Changes</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let siteContent = null;
+    let hasUnsavedChanges = false;
+    let authToken = localStorage.getItem("growth_pixel_admin_token") || null;
+
+    function showToast(msg, type = "success") {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.className = `toast show ${type}`;
+      setTimeout(() => t.className = "toast", 3500);
+    }
+
+    function markChanged() {
+      hasUnsavedChanges = true;
+      document.getElementById("saveBar").classList.add("visible");
+    }
+
+    async function checkStatus() {
+      try {
+        const res = await fetch("/api/admin/status", {
+          headers: authToken ? { "Authorization": `Bearer ${authToken}` } : {}
+        });
+        const data = await res.json();
+
+        if (!data.isInitialized) {
+          // Show Setup
+          document.getElementById("authSection").style.display = "flex";
+          document.getElementById("setupCard").style.display = "block";
+          document.getElementById("loginCard").style.display = "none";
+          document.getElementById("dashboardSection").style.display = "none";
+          document.getElementById("adminUserBadge").style.display = "none";
+          document.getElementById("logoutBtn").style.display = "none";
+        } else if (!data.isAuthenticated) {
+          // Show Login
+          document.getElementById("authSection").style.display = "flex";
+          document.getElementById("setupCard").style.display = "none";
+          document.getElementById("loginCard").style.display = "block";
+          document.getElementById("dashboardSection").style.display = "none";
+          document.getElementById("adminUserBadge").style.display = "none";
+          document.getElementById("logoutBtn").style.display = "none";
+        } else {
+          // Authenticated: Show Dashboard
+          document.getElementById("authSection").style.display = "none";
+          document.getElementById("dashboardSection").style.display = "grid";
+          const badge = document.getElementById("adminUserBadge");
+          badge.textContent = data.adminEmail || "Admin";
+          badge.style.display = "inline-block";
+          document.getElementById("logoutBtn").style.display = "inline-block";
+          loadDashboardContent();
+        }
+      } catch (err) {
+        console.error("Failed to check status:", err);
+      }
+    }
+
+    // Setup Form
+    document.getElementById("setupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("setupEmail").value.trim();
+      const password = document.getElementById("setupPass").value;
+      const confirmPassword = document.getElementById("setupConfirm").value;
+
+      if (password !== confirmPassword) {
+        showToast("Passwords do not match.", "error");
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/admin/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password, confirmPassword })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.error || "Setup failed.", "error");
+          return;
+        }
+
+        authToken = data.token;
+        localStorage.setItem("growth_pixel_admin_token", authToken);
+        showToast("Administrator setup complete! Welcome.");
+        checkStatus();
+      } catch (err) {
+        showToast("Network error during setup.", "error");
+      }
+    });
+
+    // Login Form
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPass").value;
+
+      try {
+        const res = await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.error || "Login failed.", "error");
+          return;
+        }
+
+        authToken = data.token;
+        localStorage.setItem("growth_pixel_admin_token", authToken);
+        showToast("Logged in successfully.");
+        checkStatus();
+      } catch (err) {
+        showToast("Network error during login.", "error");
+      }
+    });
+
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        await fetch("/api/admin/logout", {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${authToken}` }
+        });
+      } catch (e) {}
+      authToken = null;
+      localStorage.removeItem("growth_pixel_admin_token");
+      showToast("Logged out successfully.");
+      checkStatus();
+    });
+
+    // Tab Navigation
+    document.querySelectorAll(".admin-menu-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".admin-menu-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const target = btn.dataset.tab;
+        document.querySelectorAll(".tab-panel").forEach(p => p.style.display = "none");
+        document.getElementById(target).style.display = "block";
+      });
+    });
+
+    // Load Website Content
+    async function loadDashboardContent() {
+      try {
+        const res = await fetch("/api/content");
+        siteContent = await res.json();
+        populateFields();
+      } catch (err) {
+        showToast("Failed to fetch website content.", "error");
+      }
+    }
+
+    function populateFields() {
+      if (!siteContent) return;
+
+      // Branding
+      const b = siteContent.brand || {};
+      document.getElementById("bBrandName").value = b.name || "";
+      document.getElementById("bBrandSub").value = b.subname || "";
+      document.getElementById("bEmail").value = b.email || "";
+      document.getElementById("bLine1").value = b.line1 || "";
+      document.getElementById("bLine1Raw").value = b.line1Raw || "";
+      document.getElementById("bLine2").value = b.line2 || "";
+      document.getElementById("bLine2Raw").value = b.line2Raw || "";
+
+      // Hero
+      const h = siteContent.hero || {};
+      document.getElementById("hPrefix").value = h.prefix || "";
+      document.getElementById("hTail").value = h.tail || "";
+      document.getElementById("hWords").value = (h.words || []).join(", ");
+      document.getElementById("hDesc").value = h.description || "";
+      document.getElementById("hPrice").value = h.fromPrice || "";
+      document.getElementById("hTicks").value = (h.ticks || []).join(", ");
+
+      // Projects
+      renderProjectsList();
+
+      // Pricing
+      renderPricingList();
+
+      // Features
+      renderFeaturesList();
+
+      // Process
+      renderProcessList();
+
+      // FAQ
+      renderFaqList();
+
+      // Track changes
+      document.querySelectorAll("#dashboardSection input, #dashboardSection textarea").forEach(el => {
+        el.addEventListener("input", markChanged);
+      });
+    }
+
+    function renderProjectsList() {
+      const container = document.getElementById("projectsList");
+      const list = siteContent.samples || [];
+      container.innerHTML = list.map((item, idx) => `
+        <div class="project-item" data-idx="${idx}">
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Project Title</label>
+              <input type="text" class="proj-title" value="${escapeHtml(item.title || '')}" />
+            </div>
+            <div class="form-group">
+              <label>Category Badge</label>
+              <input type="text" class="proj-cat" value="${escapeHtml(item.category || '')}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="proj-desc" value="${escapeHtml(item.description || '')}" />
+          </div>
+          <div class="form-group">
+            <label>Project Image (Direct Upload)</label>
+            <div class="image-upload-box" onclick="triggerUpload(${idx})">
+              <b>📷 Click or drop a new screenshot here to replace</b>
+              <div style="font-size:12px; color:#7A84A3; margin-top:4px;">Supports PNG, JPG, WebP (Max 5MB)</div>
+              <input type="file" id="uploadInput_${idx}" style="display:none;" accept="image/*" onchange="handleImageUpload(event, ${idx})" />
+            </div>
+            ${item.imageUrl ? `<img src="${item.imageUrl}" class="image-preview-thumb" id="previewImg_${idx}" alt="${escapeHtml(item.title)}" />` : `<div style="font-size:12px; color:#7A84A3; margin-top:6px;" id="previewText_${idx}">Using built-in high fidelity screenshot</div>`}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function triggerUpload(idx) {
+      document.getElementById(`uploadInput_${idx}`).click();
+    }
+
+    async function handleImageUpload(e, idx) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      showToast("Uploading project image...", "info");
+      try {
+        const res = await fetch("/api/admin/upload", {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${authToken}` },
+          body: formData
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.error || "Upload failed.", "error");
+          return;
+        }
+
+        siteContent.samples[idx].imageUrl = data.url;
+        showToast("Image uploaded successfully! Click 'Save All Changes' to apply.");
+        markChanged();
+        renderProjectsList();
+      } catch (err) {
+        showToast("Error uploading file.", "error");
+      }
+    }
+
+    function renderPricingList() {
+      const container = document.getElementById("pricingList");
+      const list = siteContent.pricing || [];
+      container.innerHTML = list.map((item, idx) => `
+        <div class="project-item" data-idx="${idx}">
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Plan Name</label>
+              <input type="text" class="plan-name" value="${escapeHtml(item.name || '')}" />
+            </div>
+            <div class="form-group">
+              <label>Starting Price (₦ Numbers only)</label>
+              <input type="number" class="plan-price" value="${item.price || 0}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Best For (Target Audience)</label>
+            <input type="text" class="plan-best" value="${escapeHtml(item.best || '')}" />
+          </div>
+          <div class="form-group">
+            <label>Features (One per line)</label>
+            <textarea class="plan-inc">${(item.inc || []).join("\n")}</textarea>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="checkbox" class="plan-hot" id="hot_${idx}" ${item.hot ? 'checked' : ''} style="width:18px; height:18px;" />
+            <label for="hot_${idx}" style="font-weight:700; font-size:13px; cursor:pointer;">Mark as Most Popular (Highlighted blue card)</label>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderFeaturesList() {
+      const container = document.getElementById("featuresList");
+      const list = siteContent.features || [];
+      container.innerHTML = list.map((item, idx) => `
+        <div class="project-item">
+          <div class="form-group">
+            <label>Feature Title</label>
+            <input type="text" class="feat-title" value="${escapeHtml(item.title || '')}" />
+          </div>
+          <div class="form-group">
+            <label>Feature Description</label>
+            <textarea class="feat-desc">${escapeHtml(item.description || '')}</textarea>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderProcessList() {
+      const container = document.getElementById("processList");
+      const list = siteContent.process || [];
+      container.innerHTML = list.map((item, idx) => `
+        <div class="project-item">
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Step Number</label>
+              <input type="text" class="proc-step" value="${escapeHtml(item.step || '')}" />
+            </div>
+            <div class="form-group">
+              <label>Step Title</label>
+              <input type="text" class="proc-title" value="${escapeHtml(item.title || '')}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="proc-desc" value="${escapeHtml(item.description || '')}" />
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderFaqList() {
+      const container = document.getElementById("faqList");
+      const list = siteContent.faqs || [];
+      container.innerHTML = list.map((item, idx) => `
+        <div class="project-item" style="position:relative;">
+          <div class="form-group">
+            <label>Question</label>
+            <input type="text" class="faq-q" value="${escapeHtml(item.q || '')}" />
+          </div>
+          <div class="form-group">
+            <label>Answer</label>
+            <textarea class="faq-a">${escapeHtml(item.a || '')}</textarea>
+          </div>
+          <button type="button" class="btn btn-danger btn-sm" onclick="removeFaq(${idx})">Delete Question</button>
+        </div>
+      `).join("");
+    }
+
+    document.getElementById("addFaqBtn").addEventListener("click", () => {
+      siteContent.faqs = siteContent.faqs || [];
+      siteContent.faqs.push({ q: "New Question", a: "Answer details here..." });
+      renderFaqList();
+      markChanged();
+    });
+
+    window.removeFaq = function(idx) {
+      siteContent.faqs.splice(idx, 1);
+      renderFaqList();
+      markChanged();
+    };
+
+    // Save All Changes
+    document.getElementById("saveAllBtn").addEventListener("click", async () => {
+      // Collect Branding
+      siteContent.brand = {
+        name: document.getElementById("bBrandName").value.trim(),
+        subname: document.getElementById("bBrandSub").value.trim(),
+        email: document.getElementById("bEmail").value.trim(),
+        line1: document.getElementById("bLine1").value.trim(),
+        line1Raw: document.getElementById("bLine1Raw").value.trim(),
+        line2: document.getElementById("bLine2").value.trim(),
+        line2Raw: document.getElementById("bLine2Raw").value.trim()
+      };
+
+      // Collect Hero
+      siteContent.hero = {
+        prefix: document.getElementById("hPrefix").value.trim(),
+        tail: document.getElementById("hTail").value.trim(),
+        words: document.getElementById("hWords").value.split(",").map(w => w.trim()).filter(Boolean),
+        description: document.getElementById("hDesc").value.trim(),
+        fromPrice: document.getElementById("hPrice").value.trim(),
+        ticks: document.getElementById("hTicks").value.split(",").map(t => t.trim()).filter(Boolean)
+      };
+
+      // Collect Projects
+      const projEls = document.querySelectorAll("#projectsList .project-item");
+      siteContent.samples = siteContent.samples || [];
+      projEls.forEach((el, idx) => {
+        if (!siteContent.samples[idx]) siteContent.samples[idx] = {};
+        siteContent.samples[idx].title = el.querySelector(".proj-title").value.trim();
+        siteContent.samples[idx].category = el.querySelector(".proj-cat").value.trim();
+        siteContent.samples[idx].description = el.querySelector(".proj-desc").value.trim();
+      });
+
+      // Collect Pricing
+      const planEls = document.querySelectorAll("#pricingList .project-item");
+      siteContent.pricing = siteContent.pricing || [];
+      planEls.forEach((el, idx) => {
+        if (!siteContent.pricing[idx]) siteContent.pricing[idx] = {};
+        siteContent.pricing[idx].name = el.querySelector(".plan-name").value.trim();
+        siteContent.pricing[idx].price = parseInt(el.querySelector(".plan-price").value, 10) || 0;
+        siteContent.pricing[idx].best = el.querySelector(".plan-best").value.trim();
+        siteContent.pricing[idx].inc = el.querySelector(".plan-inc").value.split("\n").map(l => l.trim()).filter(Boolean);
+        siteContent.pricing[idx].hot = el.querySelector(".plan-hot").checked;
+      });
+
+      // Collect Features
+      const featEls = document.querySelectorAll("#featuresList .project-item");
+      siteContent.features = siteContent.features || [];
+      featEls.forEach((el, idx) => {
+        if (!siteContent.features[idx]) siteContent.features[idx] = {};
+        siteContent.features[idx].title = el.querySelector(".feat-title").value.trim();
+        siteContent.features[idx].description = el.querySelector(".feat-desc").value.trim();
+      });
+
+      // Collect Process
+      const procEls = document.querySelectorAll("#processList .project-item");
+      siteContent.process = siteContent.process || [];
+      procEls.forEach((el, idx) => {
+        if (!siteContent.process[idx]) siteContent.process[idx] = {};
+        siteContent.process[idx].step = el.querySelector(".proc-step").value.trim();
+        siteContent.process[idx].title = el.querySelector(".proc-title").value.trim();
+        siteContent.process[idx].description = el.querySelector(".proc-desc").value.trim();
+      });
+
+      // Collect FAQ
+      const faqEls = document.querySelectorAll("#faqList .project-item");
+      siteContent.faqs = [];
+      faqEls.forEach(el => {
+        siteContent.faqs.push({
+          q: el.querySelector(".faq-q").value.trim(),
+          a: el.querySelector(".faq-a").value.trim()
+        });
+      });
+
+      try {
+        const res = await fetch("/api/admin/content", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`
+          },
+          body: JSON.stringify(siteContent)
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.error || "Save failed.", "error");
+          return;
+        }
+
+        hasUnsavedChanges = false;
+        document.getElementById("saveBar").classList.remove("visible");
+        showToast("All changes saved persistently to website!");
+      } catch (err) {
+        showToast("Error saving content.", "error");
+      }
+    });
+
+    document.getElementById("discardBtn").addEventListener("click", () => {
+      loadDashboardContent();
+      hasUnsavedChanges = false;
+      document.getElementById("saveBar").classList.remove("visible");
+      showToast("Changes discarded.");
+    });
+
+    // Security Form
+    document.getElementById("securityForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const currentPassword = document.getElementById("secCurrentPass").value;
+      const newEmail = document.getElementById("secNewEmail").value.trim();
+      const newPassword = document.getElementById("secNewPass").value;
+
+      try {
+        const res = await fetch("/api/admin/security", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${authToken}`
+          },
+          body: JSON.stringify({ currentPassword, newEmail, newPassword })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showToast(data.error || "Update failed.", "error");
+          return;
+        }
+
+        document.getElementById("secCurrentPass").value = "";
+        document.getElementById("secNewPass").value = "";
+        showToast("Security credentials updated successfully.");
+        checkStatus();
+      } catch (err) {
+        showToast("Error updating security settings.", "error");
+      }
+    });
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    // Init
+    checkStatus();
+  </script>
+</body>
+</html>

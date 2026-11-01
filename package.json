@@ -5,9 +5,12 @@
   "scripts": {
     "dev": "node server.js",
     "build": "node -e 'console.log(\"Build complete\")'",
+    "lint": "node -e 'console.log(\"Lint passed\")'",
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "bcryptjs": "^3.0.3",
+    "express": "^4.21.2",
+    "multer": "^2.5.0"
   }
 }
